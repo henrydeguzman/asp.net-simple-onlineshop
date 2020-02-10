@@ -16,6 +16,7 @@ namespace asp.net_simple_onlineshop
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,14 +27,21 @@ namespace asp.net_simple_onlineshop
                 app.UseDeveloperExceptionPage();
             }
 
+            // Midleware
+            app.UseHttpsRedirection(); // Redirects http request to HTTPS 
+            app.UseStaticFiles(); // will search in a directory called wwwroot for static files.
+
+            // End middleware
+
+
+            //Enable mvc to respond to incoming request needs to map an incoming request with the correct code what will execute.
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
