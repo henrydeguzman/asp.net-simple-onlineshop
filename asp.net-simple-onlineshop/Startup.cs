@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using asp.net_simple_onlineshop.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,10 @@ namespace asp.net_simple_onlineshop
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IPieRepository, MockPieRepository>(); // register a service with its interface into the services collection
+            services.AddScoped<ICategoryRepository, MockCategoryRepository>(); 
+
+            
             services.AddControllersWithViews();
         }
 

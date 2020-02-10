@@ -5,4 +5,7 @@
     <RootNamespace>asp.net_simple_onlineshop</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
 </Project>
