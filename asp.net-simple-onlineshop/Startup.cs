@@ -33,10 +33,17 @@ namespace asp.net_simple_onlineshop
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             // register a service with its interface into the services collection
-            services.AddScoped<IPieRepository, MockPieRepository>(); 
-            services.AddScoped<ICategoryRepository, MockCategoryRepository>(); 
 
-            
+            // services with real database implementation
+            services.AddScoped<IPieRepository, PieRepository>(); 
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+
+            // services with mock implementation
+            // services.AddScoped<IPieRepository, MockPieRepository>();
+            // services.AddScoped<ICategoryRepository, MockCategoryRepository>();
+
+
             services.AddControllersWithViews();
         }
 

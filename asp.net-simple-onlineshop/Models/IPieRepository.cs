@@ -7,7 +7,7 @@ namespace asp.net_simple_onlineshop.Models
     {
         IEnumerable<Pie> AllPies { get; }
 
-        IEnumerable<Pie> PiesofTheWeek { get; }
+        IEnumerable<Pie> PiesOfTheWeek { get; }
 
         Pie GetPieById(int pieId);
     }
