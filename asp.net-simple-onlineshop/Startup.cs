@@ -6,6 +6,8 @@ using asp.net_simple_onlineshop.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -13,11 +15,25 @@ namespace asp.net_simple_onlineshop
 {
     public class Startup
     {
+        // instance of IConfiguration
+        public IConfiguration Configuration { get; }
+
+
+        // Constructor Injection
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IPieRepository, MockPieRepository>(); // register a service with its interface into the services collection
+            // Connection service with Entity Framework
+            services.AddDbContext<AppDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // register a service with its interface into the services collection
+            services.AddScoped<IPieRepository, MockPieRepository>(); 
             services.AddScoped<ICategoryRepository, MockCategoryRepository>(); 
 
             
