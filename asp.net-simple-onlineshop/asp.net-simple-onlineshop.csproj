@@ -12,5 +12,6 @@
     <Folder Include="Views\Pie\" />
     <Folder Include="ViewModels\" />
     <Folder Include="Views\Shared\" />
+    <Folder Include="wwwroot\content\" />
   </ItemGroup>
 </Project>
