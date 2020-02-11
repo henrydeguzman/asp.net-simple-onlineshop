@@ -8,5 +8,8 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\Pie\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>
