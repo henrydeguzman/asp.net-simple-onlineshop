@@ -3,3 +3,5 @@
 ################################################################################
 
 /.vs
+/asp.net-simple-onlineshop/bin/Debug/netcoreapp3.1
+/asp.net-simple-onlineshop/obj
