@@ -35,5 +35,12 @@ namespace asp.net_simple_onlineshop.Controllers
             // return view with data of all pies
             return View(piesListViewModel);
         }
+        public IActionResult Details(int id)
+        {
+            var pie = _pieRepository.GetPieById(id);
+            if (pie == null)
+                return NotFound();
+            return View(pie);
+        }
     }
 }
