@@ -24,7 +24,7 @@ namespace asp.net_simple_onlineshop.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        public ViewResult List()
+        /*public ViewResult List()
         {
             // using viewBag 
             // ViewBag.CurrentCategory = "Cheese Cakes";
@@ -34,6 +34,28 @@ namespace asp.net_simple_onlineshop.Controllers
 
             // return view with data of all pies
             return View(piesListViewModel);
+        }*/
+
+        public ViewResult List(string category)
+        {
+            IEnumerable<Pie> pies;
+            string currentCategory;
+
+            if (string.IsNullOrEmpty(category))
+            {
+                pies = _pieRepository.AllPies.OrderBy(p => p.PieId);
+                currentCategory = "All pies";
+            } else
+            {
+                pies = _pieRepository.AllPies.Where(p => p.Category.CategoryName == category)
+                    .OrderBy(p => p.PieId);
+                currentCategory = _categoryRepository.AllCategories.FirstOrDefault(p => p.CategoryName == category)?.CategoryName;
+            }
+            return View(new PiesListViewModel
+            {
+                Pies = pies,
+                CurrentCategory = currentCategory
+            });
         }
         public IActionResult Details(int id)
         {
