@@ -6,8 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Controllers\" />
     <Folder Include="wwwroot\content\" />
   </ItemGroup>
   <ItemGroup>

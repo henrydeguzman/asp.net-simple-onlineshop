@@ -37,11 +37,17 @@ namespace asp.net_simple_onlineshop
             // services with real database implementation
             services.AddScoped<IPieRepository, PieRepository>(); 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-
+            // invoke for the user the GetCart method on the ShoppingCart class. I pass in IService Provider, that is the services collection that I need in my GetCard methods.
+            // create scope shopping cart using the getcart method 
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+            // remember in the shoppingcart.getcart we used the IHttpContextAccessor that would then give us access to the session.
+            services.AddHttpContextAccessor();
 
             // services with mock implementation
             // services.AddScoped<IPieRepository, MockPieRepository>();
             // services.AddScoped<ICategoryRepository, MockCategoryRepository>();
+
+            services.AddSession(); // to register a service
 
 
             services.AddControllersWithViews();
@@ -56,9 +62,10 @@ namespace asp.net_simple_onlineshop
             }
 
             // Midleware
+            // Note: Order of the middleware definitely is important
             app.UseHttpsRedirection(); // Redirects http request to HTTPS 
             app.UseStaticFiles(); // will search in a directory called wwwroot for static files.
-
+            app.UseSession(); // make use this comes first before UseRouting
             // End middleware
 
 
